@@ -1,0 +1,329 @@
+:root{
+    --primary-color: black;
+    --text-hover-color: #d9a1a3;
+    --header-height: 106px;
+    --header-height-tablet-mobile: 56px;
+}
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* Grid */
+.grid {
+    width: 100%;
+    padding: 0;
+}
+
+.grid.wide {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* sm                              small small*/
+@media (max-width: 576px) {
+    .sm-1 {
+        max-width: 8.3333%;
+        flex: 0 0 8.3333%;
+    }
+    .sm-2 {
+        max-width: 16.6667%;
+        flex: 0 0 16.6667%;
+    }
+    .sm-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+    .sm-4 {
+        max-width: 33.3333%;
+        flex: 0 0 33.3333%;
+    }
+    .sm-5 {
+        max-width: 41.6667%;
+        flex: 0 0 41.6667%;
+    }
+    .sm-6 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+    .sm-7 {
+        width: 58.3333%;
+        max-width:  58.3333%;
+        flex: 0 0  58.3333%;
+    }
+    .sm-8 {
+        max-width: 66.6667%;
+        flex: 0 0 66.6667%;
+    }
+    .sm-9 {
+        width: 75%;
+        max-width: 75%;
+        flex: 0 0 75%;
+    }
+    .sm-10 {
+        max-width: 83.3333%;
+        flex: 0 0 83.3333%;
+    }
+    .sm-11 {
+        max-width: 91.6667%;
+        flex: 0 0 91.6667%;
+    }
+    .sm-12 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+/* >= Tablet === m                 small*/
+@media (min-width: 577px) {
+    .m-1 {
+        max-width: 8.3333%;
+        flex: 0 0 8.3333%;
+    }
+    .m-2 {
+        max-width: 16.6667%;
+        flex: 0 0 16.6667%;
+    }
+    .m-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+    .m-4 {
+        max-width: 33.3333%;
+        flex: 0 0 33.3333%;
+    }
+    .m-5 {
+        max-width: 41.6667%;
+        flex: 0 0 41.6667%;
+    }
+    .m-6 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+    .m-7 {
+        width: 58.3333%;
+        max-width:  58.3333%;
+        flex: 0 0  58.3333%;
+    }
+    .m-8 {
+        max-width: 66.6667%;
+        flex: 0 0 66.6667%;
+    }
+    .m-9 {
+        width: 75%;
+        max-width: 75%;
+        flex: 0 0 75%;
+    }
+    .m-10 {
+        max-width: 83.3333%;
+        flex: 0 0 83.3333%;
+    }
+    .m-11 {
+        max-width: 91.6667%;
+        flex: 0 0 91.6667%;
+    }
+    .m-12 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+/* mm === (577 -> 768 )             medium medium*/
+@media (min-width: 768px) {
+    .mm-1 {
+        max-width: 8.3333%;
+        flex: 0 0 8.3333%;
+    }
+    .mm-2 {
+        max-width: 16.6667%;
+        flex: 0 0 16.6667%;
+    }
+    .mm-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+    .mm-4 {
+        max-width: 33.3333%;
+        flex: 0 0 33.3333%;
+    }
+    .mm-5 {
+        max-width: 41.6667%;
+        flex: 0 0 41.6667%;
+    }
+    .mm-6 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+    .mm-7 {
+        width: 58.3333%;
+        max-width:  58.3333%;
+        flex: 0 0  58.3333%;
+    }
+    .mm-8 {
+        max-width: 66.6667%;
+        flex: 0 0 66.6667%;
+    }
+    .mm-9 {
+        width: 75%;
+        max-width: 75%;
+        flex: 0 0 75%;
+    }
+    .mm-10 {
+        max-width: 83.3333%;
+        flex: 0 0 83.3333%;
+    }
+    .mm-11 {
+        max-width: 91.6667%;
+        flex: 0 0 91.6667%;
+    }
+    .mm-12 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+/* >= Tablet & low PC === ml         medium large*/
+@media (min-width: 992px) {
+    .ml-1 {
+        max-width: 8.3333%;
+        flex: 0 0 8.3333%;
+    }
+    .ml-2 {
+        max-width: 16.6667%;
+        flex: 0 0 16.6667%;
+    }
+    .ml-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+    .ml-4 {
+        max-width: 33.3333%;
+        flex: 0 0 33.3333%;
+    }
+    .ml-5 {
+        max-width: 41.6667%;
+        flex: 0 0 41.6667%;
+    }
+    .ml-6 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+    .ml-7 {
+        width: 58.3333%;
+        max-width:  58.3333%;
+        flex: 0 0  58.3333%;
+    }
+    .ml-8 {
+        max-width: 66.6667%;
+        flex: 0 0 66.6667%;
+    }
+    .ml-9 {
+        width: 75%;
+        max-width: 75%;
+        flex: 0 0 75%;
+    }
+    .ml-10 {
+        max-width: 83.3333%;
+        flex: 0 0 83.3333%;
+    }
+    .ml-11 {
+        max-width: 91.6667%;
+        flex: 0 0 91.6667%;
+    }
+    .ml-12 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+/* PC medium resolution > ===l        large*/
+@media (min-width: 1200px) {
+    .l-1 {
+        max-width: 8.3333%;
+        flex: 0 0 8.3333%;
+    }
+    .l-2 {
+        max-width: 16.6667%;
+        flex: 0 0 16.6667%;
+    }
+    .l-3 {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+    .l-4 {
+        max-width: 33.3333%;
+        flex: 0 0 33.3333%;
+    }
+    .l-5 {
+        max-width: 41.6667%;
+        flex: 0 0 41.6667%;
+    }
+    .l-6 {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+    .l-7 {
+        width: 58.3333%;
+        max-width:  58.3333%;
+        flex: 0 0  58.3333%;
+    }
+    .l-8 {
+        max-width: 66.6667%;
+        flex: 0 0 66.6667%;
+    }
+    .l-9 {
+        width: 75%;
+        max-width: 75%;
+        flex: 0 0 75%;
+    }
+    .l-10 {
+        max-width: 83.3333%;
+        flex: 0 0 83.3333%;
+    }
+    .l-11 {
+        max-width: 91.6667%;
+        flex: 0 0 91.6667%;
+    }
+    .l-12 {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+/* Tablet - PC low resolution */
+@media (min-width: 768px) and (max-width: 991px) {
+    /* .wide {
+        max-width: 720px;
+        width: 100%;
+    } */
+}
+@media (max-width: 767px) {
+    /* .wide {
+        width: 100%;
+    } */
+}
+
+/* > PC low resolution */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .wide {
+        max-width: 950px;
+    }
+
+    .wide .row {
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+
+    .wide .row.sm-gutter {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+
+    .wide .col {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .wide .row.sm-gutter .col {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
