@@ -19,11 +19,11 @@
                                         alt="">
                                 </span>
                                 <div class="cart__image">
-                                    <img class="cart__image-img" src="{{ $product->image }}" alt="">
+                                    <img class="cart__image-img" src="{{ $product->image_url }}" alt="">
                                 </div>
                                 <div class="product__cart-info">
                                     <div class="product__name">
-                                        <p class="product__name-paras">{{ $product->product_name }}</p>
+                                        <p class="product__name-paras">{{ $product->name }}</p>
                                     </div>
                                     <div class="product__btn" data-id="{{ $product->product_id }}">
                                         <button class="product__select-buy" type="submit">
@@ -32,9 +32,9 @@
                                         </button>
                                     </div>
                                     <div class="product__price">
-                                        <p class="product__price-old">{{ $product->price }}</p>
+                                        <p class="product__price-old">{{ $product->price_old }}</p>
                                         <p class="product__price-new">
-                                            {{ number_format($product->price - $product->price_promotion, 2) }}</p>
+                                            {{ number_format($product->price_old - $product->price_new, 2) }}</p>
                                     </div>
                                 </div>
                                 <div class="product__action">

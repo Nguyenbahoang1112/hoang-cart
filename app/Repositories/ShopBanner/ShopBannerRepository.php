@@ -12,9 +12,8 @@ class ShopBannerRepository {
 
     public function getAll() {
         return $this->shopBanner
-                    ->select('image')
+                    ->select('image_url')
                     ->where('status', 1)
                     ->get();
     }
-
 }

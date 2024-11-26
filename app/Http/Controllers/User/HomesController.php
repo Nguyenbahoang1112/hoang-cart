@@ -22,7 +22,6 @@ class HomesController extends Controller
         $this->shopBannerRepository = $shopBannerRepository;
         $this->shopNewsRepository = $shopNewsRepository;
     }
-    // protected $shopProductRepository = new ProductRepository();
 
     public function index() {
         $banners = $this->shopBannerRepository->getAll();

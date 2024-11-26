@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Models\ShopCustomer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +20,7 @@ class UserController extends Controller
     }
     public function register(RegisterRequest $request)
     {
-        $shopCustomer = ShopCustomer::create([
+        $userShop = User::create([
             'id' => Str::uuid()->toString(),
             'email' => $request->email,
             'password' => bcrypt($request->password)
@@ -34,6 +34,10 @@ class UserController extends Controller
     }
     public function login(LoginRequest $request)
     {
+        // dd(Auth::attempt([
+        //     'email' => $request->email,
+        //     'password' => $request->password
+        // ]));
         if(Auth::attempt([
             'email' => $request->email,
             'password' => $request->password

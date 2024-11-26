@@ -7,7 +7,7 @@
                     @foreach ($newses as $news)
                         <div class="item">
                             <div class="news-cart">
-                                <img class="news-cart-img" src="{{ $news->image }}" alt="">
+                                <img class="news-cart-img" src="{{ $news->image_url }}" alt="">
                                 <div class="news-cart__content">
                                     <p class="news-datetime">{{ $news->created_at }}</p>
                                     <p class="news-name">{{ $news->title }}</p>

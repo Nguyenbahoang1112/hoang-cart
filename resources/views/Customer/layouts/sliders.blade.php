@@ -3,7 +3,7 @@
         <div class="swiper-wrapper swiper-wrapper-theme">
             @foreach ($banners as $banner)
                 <div class="swiper-slide swiper-slide-theme">
-                    <img class="slide-img" src="{{ $banner->image }}" alt="">
+                    <img class="slide-img" src="{{ $banner->image_url }}" alt="">
                 </div>
             @endforeach
         </div>
