@@ -34,10 +34,6 @@ class UserController extends Controller
     }
     public function login(LoginRequest $request)
     {
-        // dd(Auth::attempt([
-        //     'email' => $request->email,
-        //     'password' => $request->password
-        // ]));
         if(Auth::attempt([
             'email' => $request->email,
             'password' => $request->password
@@ -52,7 +48,9 @@ class UserController extends Controller
     public function logout() {
         if(Auth::user())
         {
+            //Xóa tất cả dữ liệu trong session
             session()->flush();
+            //Xóa một key cụ thể 'user'
             session()->forget('user');
         }
         return redirect(route('login'));

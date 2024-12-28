@@ -12,21 +12,56 @@ class ShopProductRepository {
     }
     public function getAll() {
         return $this->shopProduct
-                    ->where('status',1)
-                    ->select('*')
+                    ->where('products.status', 1)
+                    ->join('categories', 'products.category_id', '=', 'categories.id')
+                    ->select('products.*', 'categories.category_name as category_name')
                     ->get();
     }
-    // public function getByCart($productId) {
-    //     return 0;
-    // }
+    public function getProducts($productIds)
+    {
+        return $this->shopProduct
+                    ->select('*')
+                    ->join('categories', 'products.category_id', '=', 'categories.id')
+                    ->where('products.id', $productIds)
+                    ->first();
+    }
+    public function createProduct($request, $file_url) {
+        return $this->shopProduct
+                    ->create([
+                        'name' => $request->name,
+                        'image_url' => $file_url,
+                        'price_old' => $request->price_old,
+                        'price_new' => $request->price_new,
+                        'category_id' => $request->category_id,
+                    ]);
+    }
+    public function updateProduct($request, $file_url, $id) {
+        if($file_url == null) {
+            return $this->shopProduct
+                    ->where('id', $id)
+                    ->update([
+                        'name' => $request->name,
+                        'price_old' => $request->price_old,
+                        'price_new' => $request->price_new,
+                        'category_id' => $request->category_id,
+                    ]);
+        }
+        else
+            return $this->shopProduct
+                    ->where('id', $id)
+                    ->update([
+                        'name' => $request->name,
+                        'image_url' => $file_url,
+                        'price_old' => $request->price_old,
+                        'price_new' => $request->price_new,
+                        'category_id' => $request->category_id,
+                    ]);
+    }
+    public function deleteById($id)
+    {
+        return $this->shopProduct
+                    ->where('id', $id)
+                    ->delete();
+    }
 
-    // public function getProducts($productIds)
-    // {
-    //     return $this->shopProduct
-    //                 ->join('sc_shop_product_description', 'sc_shop_product_description.product_id', '=', 'sc_shop_product.id')
-    //                 ->join('sc_shop_product_promotion', 'sc_shop_product_promotion.product_id', '=', 'sc_shop_product.id')
-    //                 ->whereIn('sc_shop_product.id', $productIds)
-    //                 ->select('sc_shop_product_description.name as product_name','sc_shop_product_promotion.price_promotion')
-    //                 ->get();
-    // }
 }

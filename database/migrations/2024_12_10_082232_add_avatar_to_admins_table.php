@@ -11,21 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shop_news', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('image_url');
-            $table->text('description');
-            $table->boolean('status')->default(1);
-            $table->timestamps();
+        Schema::table('admins', function (Blueprint $table) {
+            $table->string('avatar_img')->default('/uploads/avatar/avatar_default.jpg')->after('id');
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('shop_news');
+        Schema::table('admins', function (Blueprint $table) {
+            $table->dropColumn('avatar_img');
+        });
     }
 };
