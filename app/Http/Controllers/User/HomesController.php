@@ -29,4 +29,12 @@ class HomesController extends Controller
         $products = $this->shopProductRepository->getAll();
         return view('Customer.home.index', compact('products', 'banners', 'newses'));
     }
+    public function showProduct($id) {
+        // $product = $this->shopProductRepository->find($id);
+        return view('Customer.home.productDetail');
+    }
+    public function showCart() {
+        
+        return view('Customer.home.cart');
+    }
 }

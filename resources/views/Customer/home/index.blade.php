@@ -2,7 +2,7 @@
 @push('content-css')
     <link rel="stylesheet" href="{{ asset('frontend/css/content-home.css') }}">
 @endpush
-@include('Customer.layouts.sliders')
+{{-- @include('Customer.layouts.sliders') --}}
 @section('content')
     <div class="container">
         <div class="grid wide">
@@ -25,7 +25,7 @@
                                     <div class="product__name">
                                         <p class="product__name-paras">{{ $product->name }}</p>
                                     </div>
-                                    <div class="product__btn" data-id="{{ $product->product_id }}">
+                                    <div class="product__btn" data-id="{{ $product->id }}">
                                         <button class="product__select-buy" type="submit">
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             Chọn mua
@@ -34,7 +34,7 @@
                                     <div class="product__price">
                                         <p class="product__price-old">{{ $product->price_old }}</p>
                                         <p class="product__price-new">
-                                            {{ number_format($product->price_old - $product->price_new, 2) }}</p>
+                                            {{ number_format($product->price_new, 2) }}</p>
                                     </div>
                                 </div>
                                 <div class="product__action">
@@ -52,5 +52,5 @@
             </div>
         </div>
     </div>
-    @include('Customer.layouts.news')
+    {{-- @include('Customer.layouts.news') --}}
 @endsection

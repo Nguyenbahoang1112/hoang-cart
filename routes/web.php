@@ -44,6 +44,6 @@ Route::resource('adminProduct', ProductController::class)->middleware('admin');
 Route::resource('adminNews', NewsController::class)->middleware('admin');
 Route::resource('adminBanner', BannerController::class)->middleware('admin');
 // Add to cart
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
-Route::delete('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view')->middleware('auth');
+Route::delete('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('auth');

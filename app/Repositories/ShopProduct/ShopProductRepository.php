@@ -63,5 +63,10 @@ class ShopProductRepository {
                     ->where('id', $id)
                     ->delete();
     }
-
+    public function getByCart($id) {
+        return $this->shopProduct
+                    ->where('id',$id)
+                    ->select('name','price_new','image_url')
+                    ->first();
+    }
 }

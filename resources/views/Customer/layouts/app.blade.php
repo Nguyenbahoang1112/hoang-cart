@@ -113,9 +113,7 @@
 <script>
     $(document).on('click', '.product__btn', function(e) {
         e.preventDefault();
-
-        let productId = $(this).data('id'); // Lấy product_id từ nút bấm
-
+        let productId = $(this).data('id');
         $.ajax({
             url: "{{ route('cart.add') }}", // Route xử lý yêu cầu
             type: 'POST',
@@ -157,6 +155,7 @@
             error: function(xhr, status, error) {
                 console.error(xhr.responseText); // Xử lý lỗi nếu có
             }
+
         });
     });
     $(document).on('click', '.header-nav__cart-item-delete', function(e) {

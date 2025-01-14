@@ -13,6 +13,12 @@ class User extends Authenticatable
 
     use HasApiTokens,HasFactory,Notifiable;
 
+    function orders(){
+        return $this->hasMany(Order::class);
+    }
+    function shipAddresses(){
+        return $this->hasMany(ShipAddress::class);
+    }
     protected $fillable = [
         'id',
         'name',
