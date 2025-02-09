@@ -19,63 +19,70 @@
             $user_id = auth()->id();
             // Lấy giỏ hàng của người dùng
             $order = $this->order
-                ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+                ->select('*')
+                // ->join('order_details', 'orders.id', '=', 'order_details.order_id')
                 ->where('user_id', $user_id)
                 ->where('status', 'pending')
                 ->first();
+                // dd($order->id);
             return $order;
         }
-        public function addToOrder($user_id, $product_id)
+        public function addToOrder($product_id)
         {
+            // dd($product_id);
+            $user_id = auth()->id();
             $order = $this->getOrder();
+
             if (!$order) {
-                //Nếu chưa có giỏ hàng thì tạo mới giỏ hàng và chi tiết giỏ hàng
+                // Nếu chưa có giỏ hàng thì tạo mới giỏ hàng
                 $order = $this->order->create([
-                    'user_id' => $user_id
+                    'user_id' => $user_id,
+                    'status' => 'pending',
+                    'total' => 0
                 ]);
+            }
+
+            // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
+            $orderDetail = OrderDetail::where('order_id', $order->id)
+                                        ->where('product_id', $product_id)
+                                        ->first();
+
+            if ($orderDetail) {
+                // Nếu sản phẩm đã tồn tại, tăng số lượng lên 1
+                $orderDetail->update([
+                    'quantity' => $orderDetail->quantity + 1
+                ]);
+            } else {
+                // Nếu chưa có, thêm sản phẩm mới vào giỏ hàng
                 $this->orderDetail->create([
                     'order_id' => $order->id,
                     'product_id' => $product_id,
                     'quantity' => 1
                 ]);
             }
-            else {
-                //Nếu đã có giỏ hàng thì kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-                $orderDetail = $this->orderDetail
-                    ->where('order_id', $order->id)
-                    ->where('product_id', $product_id)
-                    ->first();
-                if ($orderDetail) {
-                    //Nếu sản phẩm đã có trong giỏ hàng thì tăng số lượng sản phẩm lên 1
-                    $orderDetail->update([
-                        'quantity' => $orderDetail->quantity + 1
-                    ]);
-                }
-                else {
-                    //Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới sản phẩm vào giỏ hàng
-                    $this->orderDetail->create([
-                        'order_id' => $order->id,
-                        'product_id' => $product_id,
-                        'quantity' => 1
-                    ]);
-                }
-            }
-            $this->updateTotalPrice();
+            $order = $this->getOrder();
+            // Cập nhật tổng giá trị đơn hàng
+            $this->updateTotalPrice($order);
         }
-        public function deleteProduct ($order_id, $product_id)
+        public function deleteProduct ($product_id)
         {
+            $order_id = $this->getOrder()->id;
             // Xóa sản phẩm trong giỏ hàng
             $orderDetail = $this->orderDetail
                 ->where('order_id', $order_id)
                 ->where('product_id', $product_id)
-                ->first();
-            $orderDetail->delete();
+                ->delete();
+            // $orderDetail->delete();
+            $this->updateTotalPrice();
         }
         public function updateTotalPrice()
         {
             $orderDetails = $this->getProductInCart();
             // dd($orderDetails);
             $totalPrice = 0;
+            if(!$orderDetails) {
+                return 0;
+            }
             foreach ($orderDetails as $orderDetail) {
                 $totalPrice += $orderDetail->price_new * $orderDetail->quantity;
             }
@@ -94,15 +101,18 @@
         public function getProductInCart()
         {
             $order = $this->getOrder();
-            // dd($order->id);
-            // Cập nhật tổng giá trị đơn hàng
-            $orderDetails = $this->orderDetail
+            if ($order) {
+                $orderDetails = $this->orderDetail
                 ->select('*')
                 ->join('products', 'order_details.product_id', '=', 'products.id')
                 ->where('order_id', $order->id)
                 ->get();
-            // dd($orderDetails);
             return $orderDetails;
+            }
+            else {
+                return collect();
+            }
+
         }
     }
 ?>

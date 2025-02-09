@@ -48,6 +48,13 @@
 {{-- navbar menu and search click --}}
 <script>
     $(document).ready(function() {
+        $('.header-nav__cart').click(function() {
+            window.location.href = '/cart';
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
         $headerHide = true;
         $('.header-nav__search').click(function() {
             if ($headerHide == true) {
@@ -123,34 +130,7 @@
                 product_id: productId // Truyền product_id để thêm vào giỏ
             },
             success: function(response) {
-                if ($.isEmptyObject(response.cart)) {
-                    $('.header-nav__cart-list').append(
-                        '<div class="header-nav__cart-item">EMPTY</div>');
-                } else {
-                    $('.header-nav__cart-list').empty();
-                    $.each(response.cart, function(key, item) {
-                        $('.header-nav__cart-list').append(
-                            '<div class="header-nav__cart-item" data-id="' +
-                            productId + '">' +
-                            '<div class="header-nav__cart-item-name">' +
-                            item.product_name +
-                            '</div>' +
-                            '<div class="header-nav__cart-item-price">' +
-                            item.product_price +
-                            '</div>' +
-                            '<div class="header-nav__cart-item-quantity">x' +
-                            item.quantity +
-                            '</div>' +
-                            '<div class="header-nav__cart-item-delete" data-id="' +
-                            item.product_id + '">' +
-                            '<button class="btn-delete">' +
-                            '<i class = "fa-solid fa-trash"></i>' +
-                            '</button>' +
-                            '</div>' +
-                            '</div>'
-                        );
-                    });
-                }
+
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText); // Xử lý lỗi nếu có
@@ -165,22 +145,18 @@
         let productId = $(this).data('id');
         console.log(productId);
         $.ajax({
-            url: "{{ route('cart.remove') }}", // Route xử lý yêu cầu
+            url: "/cart/" + productId, // Truyền ID vào URL
             type: 'DELETE',
             dataType: 'json',
             data: {
-                _token: "{{ csrf_token() }}", // Bắt buộc truyền CSRF token
-                product_id: productId // Truyền product_id để thêm vào giỏ
+                _token: "{{ csrf_token() }}"
             },
             success: function(response) {
-                $(parentElement).remove()
-                if ($.isEmptyObject(response.cart)) {
-                    $('.header-nav__cart-list').append(
-                        '<div class="header-nav__cart-item">EMPTY</div>');
-                }
+                alert("Xóa thành công!");
+                location.reload();
             },
             error: function(xhr, status, error) {
-                console.error(xhr.responseText); // Xử lý lỗi nếu có
+                console.error(xhr.responseText);
             }
         });
     });

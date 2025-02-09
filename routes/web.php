@@ -9,6 +9,7 @@ use App\Http\Controllers\User\HomesController;
 use App\Http\Controllers\User\SlidersController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckOutController;
 use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,11 @@ Route::resource('adminNews', NewsController::class)->middleware('admin');
 Route::resource('adminBanner', BannerController::class)->middleware('admin');
 // Add to cart
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
-Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view')->middleware('auth');
-Route::delete('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('auth');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.view')->middleware('auth');
+Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware('auth');
+
+
+//Check out
+Route::post('/vnpay_payment', [CheckOutController::class, 'vnpay_payment'])->name('checkout.vnpay_payment')->middleware('auth');
+Route::post('/checkout', [CheckOutController::class, 'checkout'])->name('checkout.checkout')->middleware('auth');
+// Route::post('/checkout/index', [CheckOutController::class, 'index'])->name('checkout.index')->middleware('auth');

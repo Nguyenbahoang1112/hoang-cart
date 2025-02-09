@@ -19,30 +19,23 @@ class CartController extends Controller
     }
     public function index()
     {
-        return view('Customer.home.cartDetail');
+        $carts = $this->orderRepository->getProductInCart();
+        // dd($carts);
+        return view('Customer.home.cartDetail', compact('carts'));
     }
     public function addToCart(Request $request) {
-        // Lấy user_id từ người dùng đang đăng nhập
         $user_id = auth()->id(); // hoặc Auth::id();
-        $this->orderRepository->addToOrder($user_id, $request->product_id);
+        // dd($request->product_id);
+        $this->orderRepository->addToOrder( $request->product_id);
         return response()->json([
             'message' => 'Add to cart successfully'
         ]);
     }
 
     // Phương thức để xóa sản phẩm khỏi giỏ hàng
-    public function removeFromCart(Request $request)
+    public function removeFromCart($id)
     {
-        // $cart = session()->get('cart', []);
-
-        // $productId = $request->product_id;
-        // if (isset($cart[$productId])) {
-        //     unset($cart[$productId]);
-        //     session()->put('cart', $cart);
-        //     session()->save();
-        // }
-        // return response()->json([
-        //     'cart' => session()->get('cart', [])
-        // ]);
+        $this->orderRepository->deleteProduct($id);
+        return response()->json(['message' => 'Sản phẩm đã bị xóa!']);
     }
 }
