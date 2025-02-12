@@ -20,7 +20,6 @@
     {{-- My CSS --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/base.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/sliders.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     {{-- CSS Content --}}
     @stack('content-css')
@@ -33,10 +32,8 @@
         @include('Customer.layouts.header')
         {{-- Slider --}}
 
-        {{-- Container --}}
-
+        {{-- Content --}}
         @yield('content')
-        {{-- News --}}
 
         {{-- Footer --}}
         @include('Customer.layouts.footer')
@@ -95,7 +92,6 @@
     });
 </script>
 {{-- News slider --}}
-<script src="jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -130,8 +126,27 @@
                 product_id: productId // Truyền product_id để thêm vào giỏ
             },
             success: function(response) {
+                if (response.success) {
+                    let cartList = $('.header-nav__cart-list');
+                    cartList.empty(); // Xóa nội dung cũ để cập nhật mới
 
+                    response.carts.forEach(cart => {
+                        cartList.append(`
+                            <div class="header-nav__cart-item" data-id="${cart.product_id}">
+                            <div class="header-nav__cart-item-name">${cart.name}</div>
+                            <div class="header-nav__cart-item-price">${cart.price_new}</div>
+                            <div class="header-nav__cart-item-quantity">${cart.quantity}</div>
+                            <div class="header-nav__cart-item-delete" data-id="${cart.product_id}">
+                                <button class="btn-delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                            </div>
+                        `);
+                    });
+                }
             },
+
             error: function(xhr, status, error) {
                 console.error(xhr.responseText); // Xử lý lỗi nếu có
             }
@@ -161,5 +176,6 @@
         });
     });
 </script>
+@stack('scripts')
 
 </html>

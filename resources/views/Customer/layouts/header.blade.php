@@ -133,9 +133,6 @@
                     </div>
                     <div class="header-nav__cart-cart">
                         <div class="header-nav__cart-list">
-                            @php
-                                // dd(session('cart'));
-                            @endphp
                             @if (session('cart'))
                                 @foreach (session('cart') as $cart)
                                     <div class="header-nav__cart-item" data-id="{{ $cart['product_id'] }}">
@@ -165,3 +162,11 @@
         </div>
     </div>
 </header>
+{{-- <script>
+    $('document').ready(function() {
+        $('.product__btn').click(function() {
+            showToast('Thêm vào giỏ hàng thành công');
+            console.log($carts);
+        });
+    })
+</script> --}}

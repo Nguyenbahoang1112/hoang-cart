@@ -1,9 +1,14 @@
 @extends('Customer.layouts.app')
 @push('content-css')
     <link rel="stylesheet" href="{{ asset('frontend/css/content-home.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/toast.css') }}">
 @endpush
 @include('Customer.layouts.sliders')
 @section('content')
+    {{-- <div class="toast toast__success">
+        <i class="fa-solid fa-check"></i>
+        <p class="toast__success-para">Thêm vào giỏ hàng thành công</p>
+    </div> --}}
     <div class="container">
         <div class="grid wide">
             <div class="product">
@@ -54,3 +59,28 @@
     </div>
     @include('Customer.layouts.news')
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $(".product__btn").click(function() {
+                showToast("Thêm vào giỏ hàng thành công");
+            });
+        });
+
+        function showToast(message) {
+            let toast = $('<div class="toast toast__success"><p class="toast__success-para">' + message + '</p></div>');
+
+            $("body").append(toast);
+
+            // Hiển thị toast
+            toast.fadeIn(300);
+
+            // Ẩn toast sau 2 giây
+            setTimeout(() => {
+                toast.fadeOut(500, function() {
+                    $(this).remove();
+                });
+            }, 2000);
+        }
+    </script>
+@endpush

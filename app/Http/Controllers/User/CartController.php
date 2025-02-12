@@ -20,14 +20,16 @@ class CartController extends Controller
     public function index()
     {
         $carts = $this->orderRepository->getProductInCart();
-        // dd($carts);
         return view('Customer.home.cartDetail', compact('carts'));
     }
     public function addToCart(Request $request) {
         $user_id = auth()->id(); // hoặc Auth::id();
         // dd($request->product_id);
         $this->orderRepository->addToOrder( $request->product_id);
+        $carts = $this->orderRepository->getProductInCart();
         return response()->json([
+            'carts' => $carts,
+            'success' => true,
             'message' => 'Add to cart successfully'
         ]);
     }
